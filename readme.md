@@ -8,7 +8,9 @@ script to for my configuration of tmux, neovim, and alacritty terminal
 # Installation
 
 to install, run the scirpt:
-```
+```sh
+git https://github.com/muratsat/dotfiles.git
+cd dotfiles
 ./setup.sh
 ```
 

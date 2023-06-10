@@ -1,7 +1,3 @@
-rm -rf ~/.config/tmux/
-rm -rf ~/.oh-my-zsh
-rm -rf ~/.config/nvim 
-
 BLUE='\033[0;34m'
 GREEN='\033[0;32m'
 RED='\033[0;31m'
@@ -12,6 +8,14 @@ function log {
   message=$2
   echo -e "${color}${message}${NC}"
 }
+
+
+log $BLUE "Creating backup directory"
+mkdir backup
+mv ~/.zshrc backup/
+mv ~/.config/tmux/ backup/
+mv ~/.config/alacritty/alacritty.yml backup/
+mv ~/.config/nvim/ backup/
 
 
 packages="zsh tmux neovim curl git alacritty"
@@ -59,7 +63,6 @@ if [ $? -ne 0 ]; then
 else
   log $GREEN "Installed neovim"
 fi
-
 
 cp chromium-flags.conf ~/.config/chromium-flags.conf
 
