@@ -23,6 +23,7 @@ log $BLUE "Installing dependencies: $packages"
 if [ -f /etc/arch-release ]; then
   sudo pacman -S $packages 
 elif [ -f /etc/debian_version ]; then
+  sudo add-apt-repository ppa:aslatter/ppa -y
   sudo apt install $packages
 else
   log $RED "Unsupported OS"
@@ -53,6 +54,7 @@ log $GREEN "Installed nerd font"
 log $BLUE "Configuring alacritty"
 mkdir -p ~/.config/alacritty/
 cp alacritty.yml ~/.config/alacritty/alacritty.yml
+cp ./toggle_transparency.py ~/.config/alacritty/toggle_transparency.py
 log $GREEN "Configured alacritty"
 
 
