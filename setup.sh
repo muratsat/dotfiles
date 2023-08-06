@@ -53,8 +53,7 @@ log $GREEN "Installed nerd font"
 
 log $BLUE "Configuring alacritty"
 mkdir -p ~/.config/alacritty/
-cp alacritty.yml ~/.config/alacritty/alacritty.yml
-cp ./toggle_transparency.py ~/.config/alacritty/toggle_transparency.py
+cp -r ./alacritty/ ~/.config/alacritty/
 log $GREEN "Configured alacritty"
 
 
@@ -67,4 +66,5 @@ else
 fi
 
 cp chromium-flags.conf ~/.config/chromium-flags.conf
+sudo cp ./toggle-dark-theme /usr/local/bin/toggle-dark-theme
 

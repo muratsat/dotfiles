@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+set -euo
+
+if test "$(gsettings get org.gnome.desktop.interface color-scheme)" = "'prefer-light'"; then
+  gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+  gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-blue-dark'
+else
+  gsettings set org.gnome.desktop.interface color-scheme prefer-light
+  gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-blue'
+fi
+
+/home/murat/.config/alacritty/toggle_dark_theme.py
+tmux source ~/.config/tmux/tmux.conf
