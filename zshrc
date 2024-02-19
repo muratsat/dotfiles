@@ -9,16 +9,15 @@ alias mia1="ssh u0_a472@192.168.1.17 -p 8022"
 alias venv="source .venv/bin/activate"
 alias venv-init='python3 -m venv .venv && echo  '"'"'{ "exclude": [ ".venv" ], "venvPath": ".", "venv": ".venv"}'"'"' > pyrightconfig.json'
 
+export TMUX_SESSION_NAME='🐺'
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
 # attach to tmux session if exists
 if [ -z "$TMUX" ]; then
-  # check if there is a session to attach to
-  tmux attach 
-  if [ $? -eq 1 ]; then
-    # if not, create a new session
-    tmux 
+  if [[ ! "$TERM_PROGRAM" == "vscode" ]];
+  then
+    tmux new-session -A -s $TMUX_SESSION_NAME 
   fi
 fi
