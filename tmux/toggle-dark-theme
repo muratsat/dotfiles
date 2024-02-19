@@ -1,14 +1,14 @@
 #!/usr/bin/env sh
 set -euo
+ALACRITTY_DARK='hyper'
+ALACRITTY_LIGHT='atom_one_light'
 
 if test "$(gsettings get org.gnome.desktop.interface color-scheme)" = "'prefer-light'"; then
   gsettings set org.gnome.desktop.interface color-scheme prefer-dark
   gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-blue-dark'
-  sed -i 's/colors: \*one_light/colors: \*tokyonight/g' ~/.config/alacritty/alacritty.yml
-  tmux set-option -g status-style fg=white,bg=black
+  sed -i "s/$ALACRITTY_LIGHT/$ALACRITTY_DARK/g" ~/.config/alacritty/alacritty.toml
 else
   gsettings set org.gnome.desktop.interface color-scheme prefer-light
   gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-blue'
-  sed -i 's/colors: \*tokyonight/colors: \*one_light/g' ~/.config/alacritty/alacritty.yml
-  tmux set-option -g status-style bg=white,fg=black
+  sed -i "s/$ALACRITTY_DARK/$ALACRITTY_LIGHT/g" ~/.config/alacritty/alacritty.toml
 fi

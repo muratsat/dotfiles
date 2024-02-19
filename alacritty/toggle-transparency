@@ -1,7 +1,6 @@
-#!/usr/bin/env sh
-config=/home/murat/.config/alacritty/alacritty.yml
-OPAQUE='opacity: 1.0'
-TRANSPARENT='opacity: 0.8'
+config=/home/murat/.config/alacritty/alacritty.toml
+OPAQUE='opacity = 1.0'
+TRANSPARENT='opacity = 0.8'
 
 if grep -q "$OPAQUE" $config; then
   sed -i "s/$OPAQUE/$TRANSPARENT/g" $config
