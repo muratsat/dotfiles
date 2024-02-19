@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+find ~/code -mindepth 0 -maxdepth 2 -type d -not -path "*node_modules*"  | fzf | xargs tmux new-window -t '🐺' -c 
+

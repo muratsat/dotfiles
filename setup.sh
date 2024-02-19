@@ -41,7 +41,7 @@ log $BLUE "Installing tmux plugin manager"
 rm -rf ~/.config/tmux/
 mkdir -p ~/.config/tmux/
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-cp tmux.conf ~/.config/tmux/tmux.conf
+cp -r tmux/ ~/.config/tmux/
 tmux source ~/.config/tmux/tmux.conf
 
 

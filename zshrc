@@ -1,5 +1,7 @@
 set -o vi
 
+bindkey -s ^f "~/.config/tmux/new-session\n"
+
 alias vim=nvim
 alias neovim="cd ~/.config/nvim && nvim"
 alias rcss="cd /home/murat/code/rcss/ && nvim"
