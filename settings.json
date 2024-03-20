@@ -1,0 +1,72 @@
+{
+  // window
+  "window.autoDetectColorScheme": true,
+  "window.dialogStyle": "custom",
+  "window.titleBarStyle": "custom",
+  "window.customTitleBarVisibility": "auto",
+
+  // workbench
+  "workbench.colorTheme": "Tokyo Night Dark",
+  "workbench.preferredDarkColorTheme": "Tokyo Night Dark",
+  "workbench.sideBar.location": "right",
+  "workbench.activityBar.location": "top",
+
+  //editor
+  "editor.fontSize": 17,
+  "editor.mouseWheelZoom": false,
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.cursorBlinking": "phase",
+  "editor.smoothScrolling": true,
+  "editor.unicodeHighlight.ambiguousCharacters": false,
+  "editor.inlineSuggest.enabled": true,
+  "editor.tabSize": 2,
+  "editor.renderWhitespace": "trailing",
+  "editor.detectIndentation": false,
+  "editor.lineNumbers": "relative",
+  "editor.fontFamily": "JetBrainsMono Nerd Font",
+  "editor.formatOnSave": true,
+
+  // terminal
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.fontWeight": "bold",
+  "terminal.integrated.fontSize": 15,
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "terminal.integrated.inheritEnv": false,
+
+  // vim
+  "vim.useSystemClipboard": true,
+  "vim.vimrc.enable": true,
+  "vim.vimrc.path": "/home/murat/.vsvimrc",
+  "vim.handleKeys": {
+    "<C-w>": false,
+    "<C-s>": false,
+    "<C-z>": false,
+    "<C-t>": false,
+    "<C-n>": false,
+    "<C-b>": false
+  },
+
+  // code runner
+  "code-runner.runInTerminal": true,
+  "code-runner.executorMap": {
+    "c": "clear; cd $dir && gcc $fileName -o $fileNameWithoutExt && time ./$fileNameWithoutExt; rm ./$fileNameWithoutExt",
+    "cpp": "clear; cd $dir && g++ -O2 -std=c++20 $fileName -o $fileNameWithoutExt && time ./$fileNameWithoutExt; rm ./$fileNameWithoutExt",
+    "python": "cd $dir; clear; time python3 $fileName; echo ''",
+    "JavaScript": "cd $dir; clear; time node $fileName; echo ''",
+    "assembly": "cd $dir; make"
+  },
+  "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, DerivePointerAlignment: false, PointerAlignment: Left, AlignOperands: true, IndentWidth: 2, TabWidth: 2, AllowShortFunctionsOnASingleLine: None}",
+
+  // tab size 4 languages
+  "[gdscript][lua][python]": {
+    "editor.tabSize": 4
+  },
+  // indented languages
+  "[gdscript][lua]": {
+    "editor.detectIndentation": true
+  },
+  "[jsonc][javascript][typescript][typescriptreact][javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+  // end
+}
