@@ -36,15 +36,21 @@
   // vim
   "vim.useSystemClipboard": true,
   "vim.vimrc.enable": true,
-  "vim.vimrc.path": "/home/murat/.vsvimrc",
+  "vim.vimrc.path": "$HOME/.vsvimrc",
+  // "vim.vimrc.path": "c:\\Users\\murat\\AppData\\Local\\Programs\\Microsoft VS Code\\.vsvimrc",
   "vim.handleKeys": {
     "<C-w>": false,
     "<C-s>": false,
     "<C-z>": false,
     "<C-t>": false,
-    "<C-n>": false,
     "<C-b>": false
   },
+  "vim.normalModeKeyBindings": [
+    {
+      "before": ["Q"],
+      "after": ["@", "Q"]
+    }
+  ],
 
   // code runner
   "code-runner.runInTerminal": true,
@@ -53,7 +59,7 @@
     "cpp": "clear; cd $dir && g++ -O2 -std=c++20 $fileName -o $fileNameWithoutExt && time ./$fileNameWithoutExt; rm ./$fileNameWithoutExt",
     "python": "cd $dir; clear; time python3 $fileName; echo ''",
     "JavaScript": "cd $dir; clear; time node $fileName; echo ''",
-    "assembly": "cd $dir; make"
+    "lua": "cd $dir; clear; time lua $fileName; echo ''"
   },
   "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, DerivePointerAlignment: false, PointerAlignment: Left, AlignOperands: true, IndentWidth: 2, TabWidth: 2, AllowShortFunctionsOnASingleLine: None}",
 
@@ -65,8 +71,18 @@
   "[gdscript][lua]": {
     "editor.detectIndentation": true
   },
+  "[lua]": {
+    "editor.defaultFormatter": "sumneko.lua"
+  },
   "[jsonc][javascript][typescript][typescriptreact][javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
-  // end
+  },
+  "defoldKit.general.editorPath": "/home/murat/Defold",
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "go.toolsManagement.autoUpdate": true,
+  "scm.showChangesSummary": false,
+  "scm.showOutgoingChanges": "never",
+  "extensions.ignoreRecommendations": true
 }
