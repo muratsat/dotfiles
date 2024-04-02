@@ -1,14 +1,21 @@
 ---@diagnostic disable: undefined-global
 local opt = vim.opt
--- local g = vim.g
+local g = vim.g
 
-vim.cmd.colorscheme('default')
+
+-- disable netrw at the very start of your init.lua
+g.mapleader = " "       -- Make sure to set `mapleader` before lazy so your mappings are correct
+g.maplocalleader = "\\" -- Same for `maplocalleader`
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
+
+-- optionally enable 24-bit colour
+opt.termguicolors = true
 
 opt.clipboard = "unnamedplus"
 
-opt.showmode = true
+opt.showmode = false
 
-opt.clipboard = "unnamedplus"
 -- opt.cursorline = true
 
 -- Indenting
@@ -34,7 +41,7 @@ opt.shortmess:append "sI"
 opt.splitbelow = true
 opt.splitright = true
 opt.termguicolors = true
-opt.timeoutlen = 200
+opt.timeoutlen = 100
 opt.undofile = true
 
 opt.relativenumber = true
@@ -44,38 +51,6 @@ opt.incsearch = true
 opt.backspace = [[indent,eol,start]]
 opt.whichwrap:append('h')
 opt.whichwrap:append('l')
-
-vim.g.mapleader = " "       -- Make sure to set `mapleader` before lazy so your mappings are correct
-vim.g.maplocalleader = "\\" -- Same for `maplocalleader`
-
-vim.api.nvim_set_keymap('n', '<A-z>', ":set nowrap<Enter>", {noremap = true})
-vim.keymap.set('n', '<A-z>', function() vim.wo.wrap = not vim.wo.wrap end)
-
-vim.api.nvim_set_keymap('n', '<leader>tt', ':TransparentToggle<CR>', { noremap = true })
-
-vim.api.nvim_set_keymap('i', '<C-H>', '<C-W>', { noremap = true })
-vim.api.nvim_set_keymap('c', '<C-H>', '<C-W>', { noremap = true })
-
-vim.api.nvim_set_keymap('c', '<C-k>', '<Up>', { noremap = true })
-vim.api.nvim_set_keymap('c', '<C-j>', '<Down>', { noremap = true })
-
-vim.keymap.set('i', '<C-k>', '<Up>', { noremap = true })
-vim.keymap.set('i', '<C-j>', '<Down>', { noremap = true })
--- vim.keymap.set('i', '<C-h>', '<Left>', { noremap = true })
-vim.keymap.set('i', '<C-l>', '<Right>', { noremap = true })
-
-vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
-vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
-vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi")
-vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi")
-
-vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true })
-
-vim.api.nvim_set_keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
-vim.api.nvim_set_keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -93,11 +68,11 @@ vim.opt.rtp:prepend(lazypath)
 -- Example using a list of specs with the default options
 
 require("lazy").setup({
-  "folke/which-key.nvim",
+  -- "folke/which-key.nvim",
 
-  { "folke/neoconf.nvim",               cmd = "Neoconf" },
+  -- { "folke/neoconf.nvim",     cmd = "Neoconf" },
 
-  "folke/neodev.nvim",
+  -- "folke/neodev.nvim",
 
   {
     "folke/tokyonight.nvim",
@@ -137,10 +112,38 @@ require("lazy").setup({
   { 'xiyaowong/transparent.nvim' },
   { 'lewis6991/gitsigns.nvim' },
 
-  { 'muratsat/rickroll-nvim' },
+  {'romgrk/barbar.nvim',
+    dependencies = {
+      'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+      'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+    },
+    init = function() vim.g.barbar_auto_setup = false end,
+    opts = {
+      -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
+      -- animation = true,
+      -- insert_at_start = true,
+      -- …etc.
+    },
+    version = '^1.0.0', -- optional: only update when a new 1.x version is released
+  },
 })
 
-require('rickroll-nvim').setup()
+require("transparent").setup({ -- Optional, you don't have to run setup.
+  groups = {                   -- table: default groups
+    'Normal', 'NormalNC', 'Comment', 'Constant', 'Special', 'Identifier',
+    'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
+    'Conditional', 'Repeat', 'Operator', 'Structure', 'LineNr', 'NonText',
+    'SignColumn', 'CursorLine', 'CursorLineNr', 'StatusLine', 'StatusLineNC',
+    'EndOfBuffer', 'FloatBorder', "NormalFloat"
+  },
+  extra_groups = {},   -- table: additional groups that should be cleared
+  exclude_groups = {}, -- table: groups you don't want to clear
+})
+
+require('transparent').clear_prefix('Telescope')
+require('transparent').clear_prefix('NvimTree')
+
+vim.cmd.colorscheme('tokyonight-storm')
 
 local lsp_zero = require('lsp-zero')
 
@@ -159,27 +162,30 @@ require('mason-lspconfig').setup({
   }
 })
 
+require("lspconfig").tsserver.setup({})
+
+
 local cmp = require('cmp')
 
 cmp.setup({
   sources = {
-    {name = 'nvim_lsp'},
+    { name = 'nvim_lsp' },
   },
   mapping = {
-    ['<CR>'] = cmp.mapping.confirm({select = true}),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
     ['<C-e>'] = cmp.mapping.abort(),
-    ['<Up>'] = cmp.mapping.select_prev_item({behavior = 'select'}),
-    ['<Down>'] = cmp.mapping.select_next_item({behavior = 'select'}),
+    ['<Up>'] = cmp.mapping.select_prev_item({ behavior = 'select' }),
+    ['<Down>'] = cmp.mapping.select_next_item({ behavior = 'select' }),
     ['<C-p>'] = cmp.mapping(function()
       if cmp.visible() then
-        cmp.select_prev_item({behavior = 'insert'})
+        cmp.select_prev_item({ behavior = 'insert' })
       else
         cmp.complete()
       end
     end),
     ['<C-n>'] = cmp.mapping(function()
       if cmp.visible() then
-        cmp.select_next_item({behavior = 'insert'})
+        cmp.select_next_item({ behavior = 'insert' })
       else
         cmp.complete()
       end
@@ -196,17 +202,6 @@ cmp.setup({
   },
 })
 
-local telescope_builtin = require('telescope.builtin')
-vim.keymap.set('n', '<C-p>', telescope_builtin.find_files, {})
-vim.keymap.set('n', '<C-f>', telescope_builtin.live_grep, {})
-
--- disable netrw at the very start of your init.lua
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
--- optionally enable 24-bit colour
-vim.opt.termguicolors = true
-
 local function my_on_attach(bufnr)
   local api = require "nvim-tree.api"
 
@@ -218,20 +213,21 @@ local function my_on_attach(bufnr)
   api.config.mappings.default_on_attach(bufnr)
 
   -- custom mappings
-  vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent,        opts('Up'))
-  vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
+  vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent, opts('Up'))
+  vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
 end
 
 -- pass to setup along with your other options
 require("nvim-tree").setup {
   ---
   on_attach = my_on_attach,
+  view = {
+    side = "right"
+  }
   ---
 }
-vim.api.nvim_set_keymap('n', '<C-b>', ":NvimTreeToggle<Enter>", {noremap = true})
-vim.api.nvim_set_keymap('n', '<C-~>', ":NvimTreeToggle<Enter>", {noremap = true})
 
-require('gitsigns').setup{
+require('gitsigns').setup {
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
 
@@ -246,30 +242,78 @@ require('gitsigns').setup{
       if vim.wo.diff then return ']c' end
       vim.schedule(function() gs.next_hunk() end)
       return '<Ignore>'
-    end, {expr=true})
+    end, { expr = true })
 
     map('n', '[c', function()
       if vim.wo.diff then return '[c' end
       vim.schedule(function() gs.prev_hunk() end)
       return '<Ignore>'
-    end, {expr=true})
+    end, { expr = true })
 
     -- Actions
     map('n', '<leader>hs', gs.stage_hunk)
     map('n', '<A-u>', gs.reset_hunk)
-    map('v', '<leader>hs', function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
-    map('v', '<leader>hr', function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
-    map('n', '<leader>hS', gs.stage_buffer)
-    map('n', '<leader>hu', gs.undo_stage_hunk)
-    map('n', '<leader>hR', gs.reset_buffer)
-    map('n', '<leader>h', gs.preview_hunk_inline)
-    map('n', '<leader>hb', function() gs.blame_line{full=true} end)
-    map('n', '<leader>tb', gs.toggle_current_line_blame)
-    map('n', '<leader>hd', gs.diffthis)
-    map('n', '<leader>hD', function() gs.diffthis('~') end)
-    map('n', '<leader>td', gs.toggle_deleted)
+    -- map('v', '<leader>hs', function() gs.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end)
+    -- map('v', '<leader>hr', function() gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end)
+    -- map('n', '<leader>hS', gs.stage_buffer)
+    -- map('n', '<leader>hu', gs.undo_stage_hunk)
+    -- map('n', '<leader>hR', gs.reset_buffer)
+    -- map('n', '<leader>h', gs.preview_hunk_inline)
+    -- map('n', '<leader>hb', function() gs.blame_line { full = true } end)
+    -- map('n', '<leader>tb', gs.toggle_current_line_blame)
+    -- map('n', '<leader>hd', gs.diffthis)
+    -- map('n', '<leader>hD', function() gs.diffthis('~') end)
+    -- map('n', '<leader>td', gs.toggle_deleted)
 
     -- Text object
-    map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+    map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
   end
 }
+
+vim.keymap.set('n', '<A-z>', ":set nowrap<Enter>", { noremap = true })
+vim.keymap.set('n', '<A-z>', function() vim.wo.wrap = not vim.wo.wrap end)
+
+vim.keymap.set('n', '<leader>tt', ':TransparentToggle<CR>', { noremap = true })
+
+vim.keymap.set('i', '<C-H>', '<C-W>', { noremap = true })
+vim.keymap.set('c', '<C-H>', '<C-W>', { noremap = true })
+
+vim.keymap.set('c', '<C-k>', '<Up>', { noremap = true })
+vim.keymap.set('c', '<C-j>', '<Down>', { noremap = true })
+
+vim.keymap.set('i', '<C-k>', '<Up>', { noremap = true })
+vim.keymap.set('i', '<C-j>', '<Down>', { noremap = true })
+-- vim.keymap.set('i', '<C-h>', '<Left>', { noremap = true })
+vim.keymap.set('i', '<C-l>', '<Right>', { noremap = true })
+
+vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
+vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
+vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi")
+vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi")
+
+vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true })
+vim.keymap.set('n', '<C-j>', '<C-w>j', { noremap = true })
+vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true })
+vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true })
+
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
+
+vim.keymap.set('n', '<C-b>', ":NvimTreeToggle<Enter>", { noremap = true })
+vim.keymap.set('n', '<C-`>', ":NvimTreeToggle<Enter>", { noremap = true })
+
+local telescope_builtin = require('telescope.builtin')
+vim.keymap.set('n', '<C-p>', telescope_builtin.find_files, {})
+vim.keymap.set('n', '<C-f>', telescope_builtin.live_grep, {})
+
+for i = 0, 9, 1 do
+  local cmd = string.format("<A-%s>", i)
+  vim.keymap.set("n", cmd, "<cmd>BufferGoto " .. tostring(i) .. "<CR>")
+  vim.keymap.set("i", cmd, "<cmd>BufferGoto " .. tostring(i) .. "<CR>")
+  vim.keymap.set("t", cmd, "<cmd>BufferGoto " .. tostring(i) .. "<CR>")
+end
+
+vim.keymap.set("n", "<A-l>", ":BufferMoveNext<CR>")
+vim.keymap.set("n", "<A-h>", ":BufferMovePrevious<CR>")
+
+vim.keymap.set({"n", "i"}, "<C-s>", "<cmd> w<CR>")
