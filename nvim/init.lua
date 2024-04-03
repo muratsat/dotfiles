@@ -73,6 +73,9 @@ require("lazy").setup({
   -- { "folke/neoconf.nvim",     cmd = "Neoconf" },
 
   -- "folke/neodev.nvim",
+  {
+    "kdheepak/monochrome.nvim"
+  },
 
   {
     "folke/tokyonight.nvim",
@@ -134,7 +137,7 @@ require("transparent").setup({ -- Optional, you don't have to run setup.
     'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
     'Conditional', 'Repeat', 'Operator', 'Structure', 'LineNr', 'NonText',
     'SignColumn', 'CursorLine', 'CursorLineNr', 'StatusLine', 'StatusLineNC',
-    'EndOfBuffer', 'FloatBorder', "NormalFloat"
+    'EndOfBuffer', 'FloatBorder', 'NormalFloat', 'BufferTabpageFill'
   },
   extra_groups = {},   -- table: additional groups that should be cleared
   exclude_groups = {}, -- table: groups you don't want to clear
@@ -143,7 +146,8 @@ require("transparent").setup({ -- Optional, you don't have to run setup.
 require('transparent').clear_prefix('Telescope')
 require('transparent').clear_prefix('NvimTree')
 
-vim.cmd.colorscheme('tokyonight-storm')
+vim.cmd.colorscheme('monochrome')
+-- vim.cmd[[colorscheme tokyonight-night]]
 
 local lsp_zero = require('lsp-zero')
 
@@ -312,6 +316,7 @@ for i = 0, 9, 1 do
   vim.keymap.set("i", cmd, "<cmd>BufferGoto " .. tostring(i) .. "<CR>")
   vim.keymap.set("t", cmd, "<cmd>BufferGoto " .. tostring(i) .. "<CR>")
 end
+vim.keymap.set("n", "<C-q>", "<cmd>BufferClose<CR>")
 
 vim.keymap.set("n", "<A-l>", ":BufferMoveNext<CR>")
 vim.keymap.set("n", "<A-h>", ":BufferMovePrevious<CR>")
