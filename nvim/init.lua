@@ -115,9 +115,10 @@ require("lazy").setup({
   { 'xiyaowong/transparent.nvim' },
   { 'lewis6991/gitsigns.nvim' },
 
-  {'romgrk/barbar.nvim',
+  {
+    'romgrk/barbar.nvim',
     dependencies = {
-      'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+      'lewis6991/gitsigns.nvim',     -- OPTIONAL: for git status
       'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
     },
     init = function() vim.g.barbar_auto_setup = false end,
@@ -128,6 +129,13 @@ require("lazy").setup({
       -- …etc.
     },
     version = '^1.0.0', -- optional: only update when a new 1.x version is released
+  },
+
+  {
+    "supermaven-inc/supermaven-nvim",
+    config = function()
+      require("supermaven-nvim").setup({})
+    end,
   },
 })
 
@@ -146,8 +154,7 @@ require("transparent").setup({ -- Optional, you don't have to run setup.
 require('transparent').clear_prefix('Telescope')
 require('transparent').clear_prefix('NvimTree')
 
-vim.cmd.colorscheme('monochrome')
--- vim.cmd[[colorscheme tokyonight-night]]
+vim.cmd.colorscheme('tokyonight-night')
 
 local lsp_zero = require('lsp-zero')
 
@@ -292,8 +299,8 @@ vim.keymap.set('i', '<C-l>', '<Right>', { noremap = true })
 
 vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
 vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
-vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi")
-vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi")
+-- vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi")
+-- vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi")
 
 vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true })
 vim.keymap.set('n', '<C-j>', '<C-w>j', { noremap = true })
@@ -321,4 +328,5 @@ vim.keymap.set("n", "<C-q>", "<cmd>BufferClose<CR>")
 vim.keymap.set("n", "<A-l>", ":BufferMoveNext<CR>")
 vim.keymap.set("n", "<A-h>", ":BufferMovePrevious<CR>")
 
-vim.keymap.set({"n", "i"}, "<C-s>", "<cmd> w<CR>")
+vim.keymap.set({ "n", "i" }, "<C-s>", "<cmd> w<CR>")
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
