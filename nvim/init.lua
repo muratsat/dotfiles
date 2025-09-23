@@ -281,6 +281,16 @@ require('gitsigns').setup {
   end
 }
 
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "json", "javascript", "typescript", "python" },
+  sync_install = false,
+  auto_install = true,
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+}
+
 vim.keymap.set('n', '<A-z>', ":set nowrap<Enter>", { noremap = true })
 vim.keymap.set('n', '<A-z>', function() vim.wo.wrap = not vim.wo.wrap end)
 
