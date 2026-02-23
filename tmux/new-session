@@ -1,4 +1,30 @@
 #!/usr/bin/env sh
 
-find ~/code -mindepth 0 -maxdepth 2 -type d -not -path "*node_modules*"  | fzf | xargs -r tmux new-window -t $TMUX_SESSION_NAME -c 
+SELECTED_OPTION=$(printf "new-session\n%s" "$(tmux ls -F "#{session_name}")" | fzf)
 
+if [ -z "$SELECTED_OPTION" ]; then
+  exit 0
+fi
+
+TARGET_SESSION="$SELECTED_OPTION"
+
+if [ "$SELECTED_OPTION" = "new-session" ]; then
+  printf "Enter session name: "
+  read SESSION_NAME
+  
+  if [ -z "$SESSION_NAME" ]; then
+    exit 0
+  fi
+  
+  TARGET_SESSION="$SESSION_NAME"
+  
+  if ! tmux has-session -t "$TARGET_SESSION" 2>/dev/null; then
+    tmux new-session -d -s "$TARGET_SESSION"
+  fi
+fi
+
+if [ -n "$TMUX" ]; then
+  tmux switch-client -t "$TARGET_SESSION"
+else
+  tmux a -t "$TARGET_SESSION"
+fi
