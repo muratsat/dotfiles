@@ -84,6 +84,8 @@ require("lazy").setup({
     opts = {},
   },
 
+  { 'muratsat/rickroll-nvim' },
+
   { 'nvim-tree/nvim-tree.lua' },
 
   {
@@ -107,7 +109,7 @@ require("lazy").setup({
   { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x' },
   { 'williamboman/mason.nvim' },
   { 'williamboman/mason-lspconfig.nvim' },
-  { 'neovim/nvim-lspconfig' },
+  -- { 'neovim/nvim-lspconfig' },
   { 'hrsh7th/cmp-nvim-lsp' },
   { 'hrsh7th/nvim-cmp' },
   { 'L3MON4D3/LuaSnip' },
@@ -132,12 +134,28 @@ require("lazy").setup({
   },
 
   {
+    "f-person/auto-dark-mode.nvim",
+    opts = {
+      set_dark_mode = function()
+          vim.api.nvim_set_option_value("background", "dark", {})
+      end,
+      set_light_mode = function()
+          vim.api.nvim_set_option_value("background", "light", {})
+      end,
+      update_interval = 100,
+      fallback = "dark"
+    }
+  },
+
+  {
     "supermaven-inc/supermaven-nvim",
     config = function()
       require("supermaven-nvim").setup({})
     end,
   },
 })
+
+require('rickroll-nvim').setup()
 
 require("transparent").setup({ -- Optional, you don't have to run setup.
   groups = {                   -- table: default groups
@@ -173,7 +191,7 @@ require('mason-lspconfig').setup({
   }
 })
 
-require("lspconfig").tsserver.setup({})
+-- require("lspconfig").tsserver.setup({})
 
 
 local cmp = require('cmp')
@@ -340,3 +358,4 @@ vim.keymap.set("n", "<A-h>", ":BufferMovePrevious<CR>")
 
 vim.keymap.set({ "n", "i" }, "<C-s>", "<cmd> w<CR>")
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
