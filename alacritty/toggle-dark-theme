@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ALACRITTY_DARK='google'
+ALACRITTY_LIGHT='one_light'
+CONFIG_PATH="$HOME/.config/alacritty/alacritty.toml"
+
+if [[ $(osascript -e 'tell application "System Events" to tell appearance preferences to get dark mode') == "true" ]]; then
+  sed -i '' "s/$ALACRITTY_LIGHT/$ALACRITTY_DARK/g" "$CONFIG_PATH"
+  echo "Toggled to $ALACRITTY_DARK"
+else
+  sed -i '' "s/$ALACRITTY_DARK/$ALACRITTY_LIGHT/g" "$CONFIG_PATH"
+  echo "Toggled to $ALACRITTY_LIGHT"
+fi
+

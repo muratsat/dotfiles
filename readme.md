@@ -8,4 +8,5 @@ Considering cloned repo in `~/code/config/dotfiles`:
 ln -s ~/code/config/dotfiles/tmux ~/.config/tmux
 ln -s ~/code/config/dotfiles/ghostty ~/.config/ghostty
 ln -s ~/code/config/dotfiles/nvim ~/.config/nvim
+ln -s ~/code/config/dotfiles/alacritty ~/.config/alacritty
 ```

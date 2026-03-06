@@ -1,0 +1,11 @@
+#!/bin/bash
+
+config="$HOME/.config/alacritty/alacritty.toml"
+OPAQUE='opacity = 1.0'
+TRANSPARENT='opacity = 0.8'
+
+if grep -q "$OPAQUE" "$config"; then
+  sed -i '' "s/$OPAQUE/$TRANSPARENT/g" "$config"
+else
+  sed -i '' "s/$TRANSPARENT/$OPAQUE/g" "$config"
+fi
