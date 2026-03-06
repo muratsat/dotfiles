@@ -1,0 +1,38 @@
+# background-blur = true
+background-opacity = 0.8
+
+confirm-close-surface = false
+
+font-family = "JetBrains Mono"
+font-feature = -dlig, -liga, -calt
+font-size = 18
+
+macos-option-as-alt = true
+
+shell-integration = zsh
+
+theme = light:"Atom One Light",dark:"Atom"
+
+keybind = ctrl+t=reload_config
+keybind = shift+enter=text:\x1b\r # insert new line 
+
+# unbind
+keybind = cmd+enter=unbind
+keybind = cmd+t=unbind
+
+# custom macos keybinds
+
+# cmd+number send ctrl+space+number to terminal
+keybind = cmd+digit_1=text:\x001
+keybind = cmd+digit_2=text:\x002
+keybind = cmd+digit_3=text:\x003
+keybind = cmd+digit_4=text:\x004
+keybind = cmd+digit_5=text:\x005
+keybind = cmd+digit_6=text:\x006
+keybind = cmd+digit_7=text:\x007
+keybind = cmd+digit_8=text:\x008
+keybind = cmd+digit_9=text:\x009
+
+keybind = cmd+t=text:\x00c # ctrl+space+c
+keybind = cmd+w=text:\x00x # ctrl+space+x
+

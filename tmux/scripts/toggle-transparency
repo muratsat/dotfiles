@@ -1,0 +1,5 @@
+#!/bin/bash
+
+~/.config/ghostty/toggle-transparency
+~/.config/alacritty/toggle-transparency
+

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+GHOSTTY_CONFIG="$HOME/.config/ghostty/config"
+GHOSTTY_OPAQUE='background-opacity = 1.0'
+GHOSTTY_TRANSPARENT='background-opacity = 0.8'
+
+if grep -q "$GHOSTTY_OPAQUE" "$GHOSTTY_CONFIG"; then
+  sed -i '' "s/$GHOSTTY_OPAQUE/$GHOSTTY_TRANSPARENT/g" "$GHOSTTY_CONFIG"
+else
+  sed -i '' "s/$GHOSTTY_TRANSPARENT/$GHOSTTY_OPAQUE/g" "$GHOSTTY_CONFIG"
+fi
+
+osascript -e 'tell application "System Events" to tell process "ghostty" to keystroke "," using {command down, shift down}'
