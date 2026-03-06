@@ -1,5 +1,12 @@
 # Config files
 
+## Clone repo
+
+```bash
+mkdir -p ~/code/config/dotfiles
+git cloen git@github.com:muratsat/dotfiles.git ~/code/config/dotfiles
+```
+
 ## Sync repo with local config
 
 Considering cloned repo in `~/code/config/dotfiles`:
