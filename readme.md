@@ -12,8 +12,8 @@ git cloen git@github.com:muratsat/dotfiles.git ~/code/config/dotfiles
 Considering cloned repo in `~/code/config/dotfiles`:
 
 ```bash
-ln -s ~/code/config/dotfiles/tmux ~/.config/tmux
-ln -s ~/code/config/dotfiles/ghostty ~/.config/ghostty
-ln -s ~/code/config/dotfiles/nvim ~/.config/nvim
-ln -s ~/code/config/dotfiles/alacritty ~/.config/alacritty
+ln -s ./tmux ~/.config/tmux
+ln -s ./ghostty ~/.config/ghostty
+ln -s ./nvim ~/.config/nvim
+ln -s ./alacritty ~/.config/alacritty
 ```

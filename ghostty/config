@@ -14,7 +14,8 @@ shell-integration = zsh
 theme = light:"Atom One Light",dark:"Atom"
 
 keybind = ctrl+t=reload_config
-keybind = shift+enter=text:\x1b\r # insert new line 
+# insert new line 
+keybind = shift+enter=text:\x1b\r
 
 # unbind
 keybind = cmd+enter=unbind
