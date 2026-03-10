@@ -34,6 +34,8 @@ keybind = cmd+digit_7=text:\x007
 keybind = cmd+digit_8=text:\x008
 keybind = cmd+digit_9=text:\x009
 
-keybind = cmd+t=text:\x00c # ctrl+space+c
-keybind = cmd+w=text:\x00x # ctrl+space+x
+# ctrl+space+c
+keybind = cmd+t=text:\x00c
+# ctrl+space+x
+keybind = cmd+w=text:\x00x
 
