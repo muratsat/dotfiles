@@ -34,6 +34,17 @@ keybind = cmd+digit_7=text:\x007
 keybind = cmd+digit_8=text:\x008
 keybind = cmd+digit_9=text:\x009
 
+# ctrl+number to send ctrl+b+number
+keybind = ctrl+digit_1=text:\x021
+keybind = ctrl+digit_2=text:\x022
+keybind = ctrl+digit_3=text:\x023
+keybind = ctrl+digit_4=text:\x024
+keybind = ctrl+digit_5=text:\x025
+keybind = ctrl+digit_6=text:\x026
+keybind = ctrl+digit_7=text:\x027
+keybind = ctrl+digit_8=text:\x028
+keybind = ctrl+digit_9=text:\x029
+
 # ctrl+space+c
 keybind = cmd+t=text:\x00c
 # ctrl+space+x
