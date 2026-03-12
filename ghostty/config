@@ -20,10 +20,12 @@ keybind = shift+enter=text:\x1b\r
 # unbind
 keybind = cmd+enter=unbind
 keybind = cmd+t=unbind
+keybind = super+d=unbind
+keybind = super+shift+d=unbind
 
 # custom macos keybinds
 
-# cmd+number send ctrl+space+number to terminal
+# cmd+number -> ctrl+space+number
 keybind = cmd+digit_1=text:\x001
 keybind = cmd+digit_2=text:\x002
 keybind = cmd+digit_3=text:\x003
@@ -34,7 +36,7 @@ keybind = cmd+digit_7=text:\x007
 keybind = cmd+digit_8=text:\x008
 keybind = cmd+digit_9=text:\x009
 
-# ctrl+number to send ctrl+b+number
+# ctrl+number -> ctrl+b+number
 keybind = ctrl+digit_1=text:\x021
 keybind = ctrl+digit_2=text:\x022
 keybind = ctrl+digit_3=text:\x023
@@ -45,19 +47,20 @@ keybind = ctrl+digit_7=text:\x027
 keybind = ctrl+digit_8=text:\x028
 keybind = ctrl+digit_9=text:\x029
 
-# ctrl+cmd+h/l to swap tmux windows (ctrl+space+</>/>>)
+# ctrl+cmd+h/l -> swap tmux windows (ctrl+space+</>/>>)
 keybind = ctrl+cmd+h=text:\x00<
 keybind = ctrl+cmd+l=text:\x00>
 
-# ctrl+shift+h/l to navigate tmux windows (ctrl+space+p/n)
+# ctrl+shift+h/l -> navigate tmux windows (ctrl+space+p/n)
 keybind = ctrl+shift+h=text:\x00p
 keybind = ctrl+shift+l=text:\x00n
 
+# ctrl+(shift)+tab -> navigate tmux windows (ctrl+space+p/n)
 keybind = ctrl+tab=text:\x00n
 keybind = ctrl+shift+tab=text:\x00p
 
-# ctrl+space+c
+# cmd+t -> ctrl+space+c
 keybind = cmd+t=text:\x00c
-# ctrl+space+x
+# cmd+w -> ctrl+space+x
 keybind = cmd+w=text:\x00x
 
