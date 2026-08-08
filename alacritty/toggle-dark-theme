@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ALACRITTY_DARK='google'
+ALACRITTY_DARK='atom'
 ALACRITTY_LIGHT='one_light'
 CONFIG_PATH="$HOME/.config/alacritty/alacritty.toml"
 

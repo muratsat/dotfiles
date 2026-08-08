@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 search_dirs="$HOME/code $HOME/.config"
-extra_dirs="/opt/homebrew/etc/nginx/servers/"
+extra_dirs="/opt/homebrew/etc/nginx/sites-available/"
 
 {
   find $search_dirs -mindepth 0 -maxdepth 2 -type d -not -path "*node_modules*"

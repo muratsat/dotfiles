@@ -1,6 +1,6 @@
 [general]
 import = [
-    "~/.config/alacritty/themes/themes/one_light.toml"
+    "~/.config/alacritty/themes/themes/atom.toml"
 ]
 
 
@@ -8,15 +8,32 @@ import = [
 TERM = "xterm-256color"
 
 [font]
-size = 17
+size = 18
+
 [font.normal]
 family = "JetBrainsMono Nerd Font"
 style = "Regular"
 
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+
+[font.bold_italic]
+family = "JetBrainsMono Nerd Font"
+style = "Bold Italic"
+
+
 
 [window]
-# decorations = "none"
+decorations = "none"
 opacity = 0.8
+padding = { x = 5, y = 5 }
+dynamic_padding = true
+
 
 [window.dimensions]
 columns = 100
