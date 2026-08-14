@@ -1,6 +1,6 @@
 [general]
 import = [
-    "~/.config/alacritty/themes/themes/atom.toml"
+    "~/.config/alacritty/themes/themes/_active.toml"
 ]
 
 
@@ -8,7 +8,7 @@ import = [
 TERM = "xterm-256color"
 
 [font]
-size = 18
+size = 19
 
 [font.normal]
 family = "JetBrainsMono Nerd Font"
@@ -31,7 +31,7 @@ style = "Bold Italic"
 [window]
 decorations = "none"
 opacity = 0.8
-padding = { x = 5, y = 5 }
+padding = { x = 3, y = 3 }
 dynamic_padding = true
 
 

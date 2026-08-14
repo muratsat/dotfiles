@@ -5,9 +5,14 @@ ALACRITTY_DARK='atom'
 ALACRITTY_LIGHT='one_light'
 CONFIG_PATH="$HOME/.config/alacritty/alacritty.toml"
 
+set_theme() {
+  ln -fs ~/.config/alacritty/themes/themes/$1.toml ~/.config/alacritty/themes/themes/_active.toml
+  touch $CONFIG_PATH
+}
+
 if [[ $(osascript -e 'tell application "System Events" to tell appearance preferences to get dark mode') == "true" ]]; then
-  sed -i '' "s/$ALACRITTY_LIGHT/$ALACRITTY_DARK/g" "$CONFIG_PATH"
+  set_theme $ALACRITTY_DARK
 else
-  sed -i '' "s/$ALACRITTY_DARK/$ALACRITTY_LIGHT/g" "$CONFIG_PATH"
+  set_theme $ALACRITTY_LIGHT
 fi
 
